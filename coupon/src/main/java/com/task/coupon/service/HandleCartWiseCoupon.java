@@ -15,7 +15,7 @@ public class HandleCartWiseCoupon {
         double totalPrice = Double.valueOf(0);
 
 
-        CartWiseCouponDetails cartWiseCouponDetails = (CartWiseCouponDetails) coupon.getDetails();
+        CartWiseDetails cartWiseDetails = (CartWiseDetails) coupon.getDetails();
         List<Item> items = cart.getItems();
 
         for (Item item : items) {
@@ -23,8 +23,8 @@ public class HandleCartWiseCoupon {
         }
 
         double discount = 0;
-        if (totalPrice >= cartWiseCouponDetails.getThreshold()) {
-            discount = CalculateDiscountUtility.calculateDiscount(totalPrice, cartWiseCouponDetails.getDiscount());
+        if (totalPrice >= cartWiseDetails.getThreshold()) {
+            discount = CalculateDiscountUtility.calculateDiscount(totalPrice, cartWiseDetails.getDiscount());
         }
 
         UpdatedCartWitFinalAmount updatedCartWitFinalAmount = new UpdatedCartWitFinalAmount();

@@ -1,5 +1,6 @@
 package com.task.coupon.model;
 
+import com.task.coupon.model.interfaces.CouponDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -7,26 +8,25 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartWiseCouponDetails {
+public class CartWiseDetails extends CouponDetails {
 
-    Integer  threshold;
-    Integer discount;
+    private int threshold;
+    private int discount;
 
-
-    public Integer getThreshold() {
+    // Getters and Setters
+    public int getThreshold() {
         return threshold;
     }
 
-    public void setThreshold(Integer threshold) {
+    public void setThreshold(int threshold) {
         this.threshold = threshold;
     }
 
-    public  Integer getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
-    public void setDiscount( Integer discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
-
 }

@@ -1,5 +1,7 @@
 package com.task.coupon.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.task.coupon.model.interfaces.CouponDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,9 +12,13 @@ import org.springframework.stereotype.Component;
 public class Coupon {
 
 
-    String Id;
-    String type;
-    CartWiseCouponDetails details;
+    private String id;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("details")
+    private CouponDetails details;
+
+    // Getters and Setters
     public String getType() {
         return type;
     }
@@ -21,23 +27,20 @@ public class Coupon {
         this.type = type;
     }
 
-    public CartWiseCouponDetails getDetails() {
+    public CouponDetails getDetails() {
         return details;
     }
 
-    public void setDetails(CartWiseCouponDetails details) {
+    public void setDetails(CouponDetails details) {
         this.details = details;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
-
-
-
 
 }

@@ -1,8 +1,8 @@
 package com.task.coupon.dao;
 
 
+import com.task.coupon.model.CartWiseDetails;
 import com.task.coupon.model.Coupon;
-import com.task.coupon.model.CartWiseCouponDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import com.task.coupon.model.Item;
@@ -70,7 +70,7 @@ public class CouponRepo {
         Coupon coupon = new Coupon();
         coupon.setType("cart-wise");
 
-        CartWiseCouponDetails details = new CartWiseCouponDetails();
+        CartWiseDetails details = new CartWiseDetails();
         details.setThreshold(100);
         details.setDiscount(10);
         coupon.setDetails(details);
@@ -78,7 +78,7 @@ public class CouponRepo {
         coupons.add(coupon);
 
         coupon = new Coupon();
-        details = new CartWiseCouponDetails();
+        details = new CartWiseDetails();
         coupon.setType("cart-wise");
         details.setThreshold(150);
         details.setDiscount(50);

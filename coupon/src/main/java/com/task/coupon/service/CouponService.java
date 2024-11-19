@@ -71,7 +71,7 @@ public class CouponService {
 
 
         double finalTotalPrice = totalPrice;
-        List<Coupon> applicableCoupons= avilableCoupons.stream().filter(coupon -> coupon.getDetails().getThreshold() < finalTotalPrice).toList();
+        List<Coupon> applicableCoupons= avilableCoupons.stream().filter(coupon -> ((CartWiseDetails)coupon.getDetails()).getThreshold()< finalTotalPrice).toList();
 
         return applicableCoupons;
     }

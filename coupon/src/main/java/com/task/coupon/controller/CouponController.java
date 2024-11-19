@@ -16,17 +16,25 @@ public class CouponController {
     CouponService couponService;
 
     @PostMapping("/coupons")
-    public void addCoupon(@RequestBody Coupon coupon)
-    {
-        System.out.println(coupon);
-        if(coupon!=null)
-        {
-            System.out.println(coupon.getType());
-            System.out.println(coupon.getDetails());
-
-
+    public ResponseEntity<String> addCoupon(@RequestBody Coupon coupon) {
+        if ("cart-wise".equals(coupon.getType())) {
+            CartWiseDetails details = (CartWiseDetails) coupon.getDetails();
+            couponService.save(coupon);
+            return ResponseEntity.ok("Processed cart-wise coupon with threshold: " +
+                    details.getThreshold() + " and discount: " + details.getDiscount());
+        } else if ("product-wise".equals(coupon.getType())) {
+            ProductWiseDetails details = (ProductWiseDetails) coupon.getDetails();
+            couponService.save(coupon);
+            return ResponseEntity.ok("Processed product-wise coupon for product ID: " +
+                    details.getProduct_id() + " and discount: " + details.getDiscount());
+        } else if ("bxgy".equals(coupon.getType())) {
+            couponService.save(coupon);
+            return ResponseEntity.ok("Processed bxgy coupon");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid coupon type");
         }
-        couponService.save(coupon);
+
+
     }
 
 
