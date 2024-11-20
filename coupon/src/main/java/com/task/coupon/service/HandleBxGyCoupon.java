@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-
 public class HandleBxGyCoupon {
 
     public UpdatedCartWitFinalAmount calculateDiscount(Coupon coupon, Cart cart) {

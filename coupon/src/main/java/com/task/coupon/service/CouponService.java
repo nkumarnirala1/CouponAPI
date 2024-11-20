@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -26,6 +24,8 @@ public class CouponService {
     @Autowired
     private HandleBxGyCoupon applyBxGyCoupon;
 
+    @Autowired
+    private FetchApplicableCoupon fetchApplicableCoupon;
     Logger log = LoggerFactory.getLogger(CouponService.class);
 
     public UpdatedCartWitFinalAmount applyCouponOnCart(Customer customer, String couponId) {
@@ -60,32 +60,13 @@ public class CouponService {
     }
 
 
-    public List<Coupon> applicableCoupon(Customer customer) {
-
-        double totalPrice = Double.valueOf(0);
-
-        List<Item> items = customer.getCart().getItems();
-
-        totalPrice += items.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
-
-        System.out.println("total price is = " + totalPrice);
-
-        List<Coupon> avilableCoupons = couponRepo.fetchCoupons();
-
-
-        double finalTotalPrice = totalPrice;
-        List<Coupon> applicableCoupons = new ArrayList<>();
-        for(Coupon coupon :applicableCoupons)
-        {
-
-        }
-                avilableCoupons.stream().filter(coupon -> ((CartWiseDetails) coupon.getDetails()).getThreshold() < finalTotalPrice).toList();
-
-        return applicableCoupons;
-    }
-
     public Coupon getCouponById(String id) {
 
         return couponRepo.fetchCouponById(id);
+    }
+
+    public List<Coupon> applicableCoupon(Customer customer) {
+
+        return fetchApplicableCoupon.fetchApplicableCoupon(customer);
     }
 }
