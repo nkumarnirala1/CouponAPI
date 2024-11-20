@@ -13,6 +13,16 @@ public class CartWiseDetails extends CouponDetails {
     private int threshold;
     private int discount;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
     // Getters and Setters
     public int getThreshold() {
         return threshold;

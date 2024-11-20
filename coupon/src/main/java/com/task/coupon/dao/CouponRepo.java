@@ -15,11 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponRepo {
-    /*
-    { "type": "cart-wise" , "details": { "threshold": 100 , "discount": 10 } }
-     */
+
     List<Item> items = new ArrayList<>();
-    List<Coupon> coupons = new ArrayList<>();
+   public static List<Coupon> coupons = new ArrayList<>();
 
     public List<Item> addItem() {
 
@@ -41,20 +39,13 @@ public class CouponRepo {
 
     }
 
-    public void addCoupon(Coupon coupon2) {
-
-
-        Thread thread = Thread.currentThread();
-        System.out.println("get coupon Thread: " + thread.getName());
-        coupons.add(coupon2);
-        loader();
+    public void addCoupon(Coupon coupon) {
+        coupons.add(coupon);
 
     }
 
     public List<Coupon> fetchCoupons() {
 
-        Thread thread = Thread.currentThread();
-        System.out.println("fetch coupon Thread: " + thread.getName());
         return coupons;
     }
 
@@ -63,27 +54,5 @@ public class CouponRepo {
                 .filter(coupon -> couponId.equalsIgnoreCase(coupon.getId()))
                 .findFirst() // Fetches the first matching coupon
                 .orElse(null); // Returns null if no coupon matches
-    }
-
-    public void loader() {
-
-        Coupon coupon = new Coupon();
-        coupon.setType("cart-wise");
-
-        CartWiseDetails details = new CartWiseDetails();
-        details.setThreshold(100);
-        details.setDiscount(10);
-        coupon.setDetails(details);
-        coupon.setId("11");
-        coupons.add(coupon);
-
-        coupon = new Coupon();
-        details = new CartWiseDetails();
-        coupon.setType("cart-wise");
-        details.setThreshold(150);
-        details.setDiscount(50);
-        coupon.setDetails(details);
-        coupon.setId("12");
-        coupons.add(coupon);
     }
 }

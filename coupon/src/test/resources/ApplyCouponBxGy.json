@@ -1,0 +1,22 @@
+{
+  "customerId": "nitish",
+  "cart": {
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 6,
+        "price": 50
+      },
+      {
+        "product_id": 2,
+        "quantity": 3,
+        "price": 30
+      },
+      {
+        "product_id": 3,
+        "quantity": 3,
+        "price": 25
+      }
+    ]
+  }
+}

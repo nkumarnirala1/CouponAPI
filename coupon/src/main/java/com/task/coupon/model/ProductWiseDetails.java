@@ -13,6 +13,17 @@ public class ProductWiseDetails extends CouponDetails {
     private String product_id;
     private int discount;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
+
     // Getters and Setters
     public String getProduct_id() {
         return product_id;

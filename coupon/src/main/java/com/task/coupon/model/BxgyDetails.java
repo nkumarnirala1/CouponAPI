@@ -12,6 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 public class BxgyDetails extends CouponDetails {
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
     private List<ProductQuantity> buy_products;
     private List<ProductQuantity> get_products;
     private int repition_limit;

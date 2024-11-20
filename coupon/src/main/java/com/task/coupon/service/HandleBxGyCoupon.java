@@ -12,11 +12,17 @@ public class HandleBxGyCoupon {
 
     public UpdatedCartWitFinalAmount calculateDiscount(Coupon coupon, Cart cart) {
 
-        double totalPrice = Double.valueOf(0);
+
+        List<Item> itemList = cart.getItems();
+        Double totalPrice = cart.getItems()
+                .stream()
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .sum();
 
         BxgyDetails bxgyDetails = (BxgyDetails) coupon.getDetails();
         int repetionLimit = bxgyDetails.getRepition_limit();
-        List<Item> itemList = cart.getItems();
+
+
         HashMap<String, ProductQuantity> buyProductMap = new HashMap<>();
         HashMap<String, ProductQuantity> getProductMap = new HashMap<>();
 
@@ -44,18 +50,18 @@ public class HandleBxGyCoupon {
                         discount += item.getPrice() * buyQuantity;
                     } else {
                         int n = buyQuantity / offeredQuantity;
-                        if (n <= noOfTimesOfferApplicable) {
+                        if (n < noOfTimesOfferApplicable) {
                             discount += item.getPrice() * buyQuantity;
                             noOfTimesOfferApplicable -= n;
                         } else {
                             discount += item.getPrice() * noOfTimesOfferApplicable;
+                            break;
                         }
 
                     }
 
                 }
 
-                totalPrice+=item.getPrice()*item.getQuantity();
             }
         }
         UpdatedCartWitFinalAmount updatedCartWitFinalAmount = new UpdatedCartWitFinalAmount();
@@ -70,7 +76,7 @@ public class HandleBxGyCoupon {
         return updatedCartWitFinalAmount;
     }
 
-    public int checkIfBxGyCouponApplicable(List<String> productIdsApplicableForDiscount, HashMap<String, ProductQuantity> getProductMap, HashMap<String, ProductQuantity> buyProductMap, List<Item> itemList, int repetionLimit) {
+    public int checkIfBxGyCouponApplicable( List<String> productIdsApplicableForDiscount, HashMap<String, ProductQuantity> getProductMap, HashMap<String, ProductQuantity> buyProductMap, List<Item> itemList, int repetionLimit) {
 
         int offerCount = 0;
 
@@ -82,7 +88,7 @@ public class HandleBxGyCoupon {
                 int offerQuantity = productQuantity.getQuantity();
                 int boughtQuantity = item.getQuantity();
 
-                if (boughtQuantity > offerQuantity) {
+                if (boughtQuantity >= offerQuantity) {
                     offerCount += (boughtQuantity / offerQuantity);
 
                 }
