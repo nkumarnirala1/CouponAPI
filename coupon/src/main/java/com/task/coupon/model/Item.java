@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
-    private String productId;
+    private String product_id;
     private int quantity;
 
     private double price;
@@ -39,11 +39,11 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 }

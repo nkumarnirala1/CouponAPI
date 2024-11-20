@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -17,25 +18,35 @@ public class CouponService {
     private CouponRepo couponRepo;
 
     @Autowired
-    private HandleCartWiseCoupon applyCoupon;
+    private HandleCartWiseCoupon applyCartWiseCoupon;
+
+    @Autowired
+    private HandleProductWiseCoupon applyProductCoupon;
+
+    @Autowired
+    private HandleBxGyCoupon applyBxGyCoupon;
 
     Logger log = LoggerFactory.getLogger(CouponService.class);
 
     public UpdatedCartWitFinalAmount applyCouponOnCart(Customer customer, String couponId) {
 
-        UpdatedCartWitFinalAmount updatedCartWitFinalAmount=null ;
-
-        //log.info("couponDd = {} && cart {}", couponId, customer.getCart());
+        UpdatedCartWitFinalAmount updatedCartWitFinalAmount = null;
 
         System.out.println("couponDd = " + couponId + " && cart " + customer.getCart());
         Coupon coupon = couponRepo.fetchCouponById(couponId);
 
         System.out.println("fetched coupon = " + coupon);
-       // log.info("fetched coupon = {}", coupon);
 
         if (Constant.CART_WISE.equalsIgnoreCase(coupon.getType())) {
-            updatedCartWitFinalAmount = applyCoupon.calculateDiscount(coupon, customer.getCart());
+            updatedCartWitFinalAmount = applyCartWiseCoupon.calculateDiscount(coupon, customer.getCart());
+        } else if (Constant.PRODUCT_WISE.equalsIgnoreCase(coupon.getType())) {
+            updatedCartWitFinalAmount = applyProductCoupon.calculateDiscount(coupon, customer.getCart());
+        } else if (Constant.BXGY.equalsIgnoreCase(coupon.getType())) {
+            updatedCartWitFinalAmount = applyBxGyCoupon.calculateDiscount(coupon, customer.getCart());
+        } else {
+            System.out.println("Invalid coupon");//TODO
         }
+
 
         return updatedCartWitFinalAmount;
     }
@@ -60,18 +71,15 @@ public class CouponService {
         System.out.println("total price is = " + totalPrice);
 
         List<Coupon> avilableCoupons = couponRepo.fetchCoupons();
-//        Iterator<Coupon> iterator = applicableCoupons.iterator();
-//
-//        while (iterator.hasNext()) {
-//            Coupon coupon = iterator.next();
-//            if (coupon.getDetails().getThreshold() < totalPrice) {
-//                iterator.remove();
-//            }
-//        }
 
 
         double finalTotalPrice = totalPrice;
-        List<Coupon> applicableCoupons= avilableCoupons.stream().filter(coupon -> ((CartWiseDetails)coupon.getDetails()).getThreshold()< finalTotalPrice).toList();
+        List<Coupon> applicableCoupons = new ArrayList<>();
+        for(Coupon coupon :applicableCoupons)
+        {
+
+        }
+                avilableCoupons.stream().filter(coupon -> ((CartWiseDetails) coupon.getDetails()).getThreshold() < finalTotalPrice).toList();
 
         return applicableCoupons;
     }

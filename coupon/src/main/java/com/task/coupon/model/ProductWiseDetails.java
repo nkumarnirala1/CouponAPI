@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class ProductWiseDetails extends CouponDetails {
 
-    private int product_id;
+    private String product_id;
     private int discount;
 
     // Getters and Setters
-    public int getProduct_id() {
+    public String getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(String product_id) {
         this.product_id = product_id;
     }
 

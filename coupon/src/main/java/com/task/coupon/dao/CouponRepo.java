@@ -25,13 +25,13 @@ public class CouponRepo {
 
         Item item = new Item();
 
-        item.setProductId("1");
+        item.setProduct_id("1");
         item.setPrice(100);
         item.setQuantity(2);
         items.add(item);
 
         item = new Item();
-        item.setProductId("2");
+        item.setProduct_id("2");
         item.setPrice(200);
         item.setQuantity(1);
 

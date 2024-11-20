@@ -2,32 +2,41 @@ package com.task.coupon.service;
 
 import com.task.coupon.model.*;
 import com.task.coupon.utility.CalculateDiscountUtility;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class HandleCartWiseCoupon{
-
+public class HandleProductWiseCoupon {
 
     public UpdatedCartWitFinalAmount calculateDiscount(Coupon coupon, Cart cart) {
+
         double totalPrice = Double.valueOf(0);
 
 
-        CartWiseDetails cartWiseDetails = (CartWiseDetails) coupon.getDetails();
+        ProductWiseDetails details = (ProductWiseDetails) coupon.getDetails();
         List<Item> items = cart.getItems();
 
+        double product_price = 0;
+        double totalPriceapplicableforDiscount = 0;
+        int countProduct = 0;
         for (Item item : items) {
+            if (item.getProduct_id().equalsIgnoreCase(details.getProduct_id())) {
+                countProduct += item.getQuantity();
+                product_price = item.getPrice();
+            }
+
             totalPrice += item.getPrice() * item.getQuantity();
         }
-
         double discount = 0;
-        if (totalPrice >= cartWiseDetails.getThreshold()) {
-            discount = CalculateDiscountUtility.calculateDiscountByPercentage(totalPrice, cartWiseDetails.getDiscount());
-        }
 
+        if (countProduct > 0) {
+            totalPriceapplicableforDiscount = countProduct * product_price;
+
+
+            discount = CalculateDiscountUtility.calculateDiscountByPercentage(totalPriceapplicableforDiscount, details.getDiscount());
+
+        }
         UpdatedCartWitFinalAmount updatedCartWitFinalAmount = new UpdatedCartWitFinalAmount();
 
         UpdatedCart updatedCart = new UpdatedCart();
