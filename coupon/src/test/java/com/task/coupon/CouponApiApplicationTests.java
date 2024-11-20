@@ -3,18 +3,26 @@ package com.task.coupon;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.task.coupon.controller.CouponController;
-import com.task.coupon.Repo.CouponRepo;
+import com.task.coupon.dao.CouponRepo;
+import com.task.coupon.model.CartWiseDetails;
 import com.task.coupon.model.Coupon;
 import com.task.coupon.model.Customer;
 import com.task.coupon.model.UpdatedCartWitFinalAmount;
 import com.task.coupon.service.CouponService;
+import com.task.coupon.utility.CouponLoader;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
+import org.springframework.test.context.event.annotation.BeforeTestExecution;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 
 @SpringBootTest

@@ -1,6 +1,6 @@
 package com.task.coupon.service;
 
-import com.task.coupon.Repo.CouponRepo;
+import com.task.coupon.dao.CouponRepo;
 import com.task.coupon.model.*;
 import com.task.coupon.utility.Constant;
 import org.slf4j.Logger;

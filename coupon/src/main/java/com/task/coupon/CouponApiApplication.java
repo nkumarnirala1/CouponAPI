@@ -1,6 +1,6 @@
 package com.task.coupon;
 
-import com.task.coupon.Repo.CouponRepo;
+import com.task.coupon.dao.CouponRepo;
 import com.task.coupon.model.Coupon;
 import com.task.coupon.utility.CouponLoader;
 import org.springframework.beans.factory.annotation.Autowired;

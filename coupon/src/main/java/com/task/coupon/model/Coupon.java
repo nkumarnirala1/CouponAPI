@@ -2,8 +2,6 @@ package com.task.coupon.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.task.coupon.model.interfaces.CouponDetails;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,11 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class Coupon {
 
 
-    @Id
     private String id;
     @JsonProperty("type")
     private String type;
