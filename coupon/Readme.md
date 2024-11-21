@@ -6,6 +6,9 @@ This documentation outlines the assumptions, implemented cases, and pending enha
 1. A single customer can have only one cart.
 2. Each coupon has a unique ID.
 
+**Postman Collection:**  
+  A Postman collection is attached to test all the required REST endpoints for this task. This collection includes example requests and responses for each endpoint, making it easy to verify the system's functionality.
+
 ## **Implemented Cases**
 
 ### 1. Cart-wise Discount
@@ -76,4 +79,11 @@ This documentation outlines the assumptions, implemented cases, and pending enha
 
 4. **Dynamic Coupon Validation:**
     - Validate coupon eligibility in real-time, including scenarios where inventory updates might affect the applicability of "Buy X, Get Y Free" offers.
+
+## **Note**
+
+As I am engaged in my personal office work and due to time constraints, I have not implemented a database for CRUD operations. Instead, required data is cached within the application. This approach allows for efficient data handling without persistent storage.
+- Concurrency can also be managed to handle simultaneous execution scenarios, ensuring the consistency and integrity of cached data.
+
+
 ---  

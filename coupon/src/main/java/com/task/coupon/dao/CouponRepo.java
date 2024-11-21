@@ -40,6 +40,8 @@ public class CouponRepo {
     }
 
     public void addCoupon(Coupon coupon) {
+
+        coupons.removeIf(coupon1 -> coupon1.getId().equalsIgnoreCase(coupon.getId())); //remove if coupon is already present
         coupons.add(coupon);
 
     }
